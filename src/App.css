@@ -1,0 +1,438 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(55, 65, 81);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(219, 234, 254);
+}
+a:hover {
+  color: rgb(156, 163, 175);
+  border-top: 1px solid rgb(156, 163, 175);
+}
+
+.cadastroFornecedores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+.cadastroFornecedores h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.cadastroFornecedores form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+.cadastroFornecedores form .wrapper {
+  width: 100%;
+}
+.cadastroFornecedores form .wrapper .input {
+  width: 50%;
+}
+.cadastroFornecedores form .editor {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.cadastroFornecedores form .editor .dropdownWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.cadastroFornecedores form .editor .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.cadastroFornecedores form .editor .botoes {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.cadastroFornecedores form .botoes {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.cadastroFornecedores form .botoes .button {
+  width: 33%;
+  font-size: 1.2rem;
+}
+
+.cadastroContatos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+.cadastroContatos h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.cadastroContatos form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid rgb(156, 163, 175);
+  width: 80%;
+}
+.cadastroContatos form .wrapper {
+  width: 100%;
+}
+.cadastroContatos form .wrapper .input {
+  width: 50%;
+}
+.cadastroContatos form .editor {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.cadastroContatos form .editor .dropdownWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
+.cadastroContatos form .editor .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.cadastroContatos form .editor .botoes {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.cadastroContatos form .botoes {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.cadastroContatos form .botoes .button {
+  width: 33%;
+  font-size: 1.2rem;
+}
+.cadastroContatos .dropdownWrapper {
+  width: 80%;
+}
+.cadastroContatos .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+.cadastroProdutos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+.cadastroProdutos h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.cadastroProdutos form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+.cadastroProdutos form .wrapper {
+  width: 100%;
+}
+.cadastroProdutos form .wrapper .input {
+  width: 50%;
+}
+.cadastroProdutos form .editor {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.cadastroProdutos form .editor .dropdownWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
+.cadastroProdutos form .editor .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.cadastroProdutos form .editor .botoes {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.cadastroProdutos form .botoes {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.cadastroProdutos form .botoes .button {
+  width: 33%;
+  font-size: 1.2rem;
+}
+.cadastroProdutos .button {
+  width: 30%;
+  font-size: 1.2rem;
+}
+
+.cadastroCotacoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.cadastroCotacoes h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.cadastroCotacoes form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+.cadastroCotacoes form .wrapper {
+  width: 100%;
+}
+.cadastroCotacoes form .wrapper .input {
+  width: 50%;
+}
+.cadastroCotacoes form .botoes {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.cadastroCotacoes form .botoes .button {
+  width: 33%;
+  font-size: 1.2rem;
+}
+.cadastroCotacoes form .editor {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.cadastroCotacoes form .editor .dropdownWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
+.cadastroCotacoes form .editor .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.cadastroCotacoes form .editor .botoes {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.cadastroCotacoes form .editor .dropdownWrapper {
+  width: 100%;
+}
+.cadastroCotacoes form .editor .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.cadastroCotacoes .dropdownWrapper {
+  width: 100%;
+}
+.cadastroCotacoes .dropdownWrapper .dropdown {
+  height: 3rem;
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+.consulta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.consulta h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.consulta .listagemCotacoes {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+}
+.consulta .listagemCotacoes .cotacaoCard {
+  width: 100%;
+  border-bottom: 1px solid rgb(156, 163, 175);
+  padding: 1rem;
+}
+.consulta .listagemCotacoes .cotacaoCard h2 {
+  color: rgb(29, 78, 216);
+  text-align: center;
+}
+.consulta .listagemCotacoes .cotacaoCard ul {
+  list-style: none;
+}
+.consulta .listagemCotacoes .cotacaoCard ul li {
+  background-color: darkblue;
+}
+.consulta .listagemCotacoes .cotacaoCard .cotacaoInfo {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  color: rgb(219, 234, 254);
+  flex-wrap: wrap;
+}
+.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  color: rgb(219, 234, 254);
+  margin-top: 1rem;
+}
+.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorContatos {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorContatos p {
+  color: rgb(219, 234, 254);
+  margin: 0.5rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  height: 100vh;
+}
+.home h1 {
+  font-size: 7rem;
+  color: rgb(29, 78, 216);
+  text-align: center;
+}
+.home h2 {
+  font-size: 3rem;
+  color: rgb(37, 99, 235);
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  transition: background-color 0.3s ease-in-out;
+}
+.menu li {
+  list-style: none;
+}
+.menu li a {
+  color: rgb(37, 99, 235);
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background-color: rgb(156, 163, 175);
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 1.2rem;
+  color: rgb(219, 234, 254);
+  padding: 0 0.5rem;
+}
+.input:focus {
+  outline: none;
+  box-shadow: var(--tw-ring-inset) 0, 0, 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+.input::placeholder {
+  color: lightgray;
+}
+
+.textarea {
+  height: 9rem;
+}
+
+.dropdown {
+  background-color: rgb(156, 163, 175);
+  color: rgb(219, 234, 254);
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.95em;
+  cursor: pointer;
+}
+.dropdown:hover {
+  background-color: rgb(219, 234, 254);
+  color: rgb(156, 163, 175);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: rgb(37, 99, 235);
+  border-radius: 0.25rem;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: rgb(219, 234, 254);
+  cursor: pointer;
+  padding: 0 1rem;
+  border: none;
+}
+.button:hover {
+  background-color: rgb(29, 78, 216);
+}
+
+.label {
+  margin-top: 0.75rem;
+  color: rgb(219, 234, 254);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.labelCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*# sourceMappingURL=App.css.map */

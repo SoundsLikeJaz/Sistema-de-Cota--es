@@ -1,0 +1,69 @@
+@use '../1-base/variables'
+
+.consulta
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 2.5rem
+    padding-bottom: 2.5rem
+
+    & h1
+        color: variables.$primary-color
+        margin-top: variables.$afastamento
+
+    .listagemCotacoes 
+        width: 80%
+        display: flex
+        flex-direction: column
+        align-items: center
+        gap: 1rem
+        list-style: none
+
+        .cotacaoCard
+            width: 100%
+            border-bottom: 1px solid variables.$grayish-blue
+            padding: 1rem
+
+            h2
+                color: variables.$secondary-color
+                text-align: center
+
+            ul
+                list-style: none
+
+                li
+                    background-color: darkblue
+
+            .cotacaoInfo
+                margin-top: 1rem
+                display: flex
+                justify-content: space-evenly
+                gap: 1rem
+                color: variables.$light-color
+                flex-wrap: wrap
+
+            .cotacaoFornecedor
+                width: 100%
+                display: flex
+                flex-direction: column
+                align-items: center
+                gap: 0.5rem
+
+                .fornecedorInfo
+                    width: 100%
+                    display: flex
+                    justify-content: space-evenly
+                    gap: 0.5rem
+                    color: variables.$light-color
+                    margin-top: 1rem
+
+                .fornecedorContatos
+                    width: 80%
+                    display: flex
+                    justify-content: space-evenly
+                    flex-wrap: wrap
+
+                    p
+                        color: variables.$light-color
+                        margin: 0.5rem
+                
