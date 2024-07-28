@@ -15,27 +15,33 @@ const CadastroCotacoes = () => {
 
     function gerarCotacoes() {
         let lista = [];
-        if (selectedProduto.cotacoes.length > 0 && selectedFornecedor.cotacoes.length > 0) {
-            lista = selectedProduto.cotacoes.filter(cotacao => selectedFornecedor.cotacoes.some(c => c.id === cotacao.id));
-        } else if(selectedProduto.cotacoes.length > 0) {
-            lista = selectedProduto.cotacoes;
-        } else if(selectedFornecedor.cotacoes.length > 0) {
-            lista = selectedFornecedor.cotacoes;
+        const produtoCotacoes = selectedProduto.cotacoes || [];
+        const fornecedorCotacoes = selectedFornecedor.cotacoes || [];
+
+        if (produtoCotacoes.length > 0 && fornecedorCotacoes.length > 0) {
+            lista = produtoCotacoes.filter(cotacao => fornecedorCotacoes.some(c => c.id === cotacao.id));
+        } else if (produtoCotacoes.length > 0) {
+            lista = produtoCotacoes;
+            console.log("array de produtos")
+        } else if (fornecedorCotacoes.length > 0) {
+            lista = fornecedorCotacoes;
+            console.log("array de fornecedores")
         } else {
             lista = [];
+            console.log("array vazio");
         }
         setCotacoes(lista);
     }
 
     function handleSelectProduto(event) {
-        let selected = produtos.find(produto => produto.id === parseInt(event.target.value))[0];
+        let selected = produtos.find(produto => produto.id === parseInt(event.target.value));
         setSelectedProduto(selected);
         setIdEmEdicao(0);
         setEditando(false);
     }
 
     function handleSelectFornecedor(event) {
-        let selected = fornecedores.find(fornecedor => fornecedor.id === parseInt(event.target.value))[0];
+        let selected = fornecedores.find(fornecedor => fornecedor.id === parseInt(event.target.value));
         setSelectedFornecedor(selected);
         setIdEmEdicao(0);
         setEditando(false);
@@ -93,14 +99,18 @@ const CadastroCotacoes = () => {
             });
 
             setFornecedores(updatedFornecedores);
+            setSelectedFornecedor(updatedFornecedor);
+            setSelectedProduto(updatedProduto);
             setProdutos(updatedProdutos);
             alert("Cotação cadastrada com sucesso!");
+            console.log(novaCotacao)
 
             preco.value = "";
             data.value = "";
             observacoes.value = "";
         } else {
             alert("Preencha todos os campos!");
+            console.log(produto, fornecedor, preco.value, data.value);
         }
     }
 
@@ -196,7 +206,7 @@ const CadastroCotacoes = () => {
         <div className="cadastroCotacoes">
             <h1>Cadastro de Cotações</h1>
             <form>
-                {!editando &&
+                {editando === false &&
                     <div className="dropdownWrapper">
                         <DropDown id="produto" label="Produto" options={produtos} disabled="Selecione um produto" onChange={handleSelectProduto} />
                         <DropDown id="fornecedor" label="Fornecedor" options={fornecedores} disabled="Selecione um fornecedor" onChange={handleSelectFornecedor} />
@@ -205,7 +215,7 @@ const CadastroCotacoes = () => {
                 <TextField id="preco" inputType="number" placeholder="Preço" label="Preço" />
                 <TextField id="data" inputType="date" label="Data" />
                 <TextField id="observacoes" inputType="textarea" placeholder="Observações" label="Observações" />
-                {!editando ?
+                {editando === false ?
                     (
                         <div className="botoes">
                             <Button texto="Cadastrar" onClick={handleCadastrar} />
