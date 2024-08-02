@@ -41,6 +41,7 @@ const CadastroCotacoes = () => {
             lista = fornecedorCotacoes;
         } else {
             lista = [];
+            console.log("array vazio");
         }
 
         setCotacoes(lista);
@@ -130,6 +131,7 @@ const CadastroCotacoes = () => {
             setSelectedProduto(updatedProduto);
             setProdutos(updatedProdutos);
             alert("Cotação cadastrada com sucesso!");
+            console.log(novaCotacao)
 
             preco.value = "";
             data.value = "";
