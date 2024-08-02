@@ -6,7 +6,7 @@ const Consulta = () => {
     const { produtos } = useContext(ProdutosContext);
     const { fornecedores } = useContext(FornecedoresContext);
 
-    const produtosCotados = produtos.filter(produto => produto.cotacoes);
+    const produtosCotados = produtos.filter(produto => produto.cotacoes && produto.cotacoes.length > 0);
 
     return (
         <div className="consulta">
