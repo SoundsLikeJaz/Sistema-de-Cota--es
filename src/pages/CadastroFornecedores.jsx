@@ -1,15 +1,16 @@
 import { useContext, useState } from "react";
 import { Button, DropDown, TextField } from "../components";
 import { FornecedoresContext } from "../context";
+import { atualizarFornecedor, excluirFornecedor, inserirFornecedor } from "../infra/fornecedores";
 
 const CadastroFornecedores = () => {
 
     const { fornecedores, setFornecedores } = useContext(FornecedoresContext);
-    const [ idEmEdicao, setIdEmEdicao ] = useState(0);
+    const [ idEmEdicao, setIdEmEdicao ] = useState("");
     const [ editando, setEditando ] = useState(false);
 
     function handleSelect(event) {
-        let selected = fornecedores.find(fornecedor => fornecedor.id === parseInt(event.target.value));
+        let selected = fornecedores.find(fornecedor => fornecedor.id === event.target.value);
         setIdEmEdicao(selected.id);
 
         let nome = document.getElementById("nome");
@@ -21,7 +22,7 @@ const CadastroFornecedores = () => {
         endereco.value = selected.endereco;
     }
 
-    function handleCadastrar(event) {
+    async function handleCadastrar(event) {
         event.preventDefault();
 
         let nome = document.getElementById("nome");
@@ -30,16 +31,15 @@ const CadastroFornecedores = () => {
 
         if (nome, cnpj, endereco) {
             let fornecedor = {
-                id: fornecedores.length + 1,
                 nome: nome.value,
                 cnpj: cnpj.value,
                 endereco: endereco.value,
                 contatos: [],
-                cotacoes: []
             }
 
             setFornecedores([...fornecedores, fornecedor]);
-            alert("Fornecedor cadastrado com sucesso!");
+            const sucesso = await inserirFornecedor(fornecedor);
+            sucesso ? alert("Fornecedor cadastrado com sucesso!") : alert("Erro ao cadastrar fornecedor!");
 
             nome.value = "";
             cnpj.value = "";
@@ -55,22 +55,28 @@ const CadastroFornecedores = () => {
         setEditando(true);
     }
 
-    function handleSalvar(event) {
+    async function handleSalvar(event) {
         event.preventDefault();
 
         let nome = document.getElementById("nome");
         let cnpj = document.getElementById("cnpj");
         let endereco = document.getElementById("endereco");
 
-        if (nome, cnpj, endereco) {
+        if (nome.value && cnpj.value && endereco.value) {
+            let fornecedorAtualizado = {
+                nome: nome.value,
+                cnpj: cnpj.value,
+                endereco: endereco.value,
+            };
+
+            await atualizarFornecedor(idEmEdicao, fornecedorAtualizado);
+
             let updatedFornecedores = fornecedores.map(fornecedor => {
                 if (fornecedor.id === idEmEdicao) {
                     return {
                         ...fornecedor,
-                        nome: nome.value,
-                        cnpj: cnpj.value,
-                        endereco: endereco.value
-                    }
+                        ...fornecedorAtualizado
+                    };
                 } else {
                     return fornecedor;
                 }
@@ -82,24 +88,26 @@ const CadastroFornecedores = () => {
             nome.value = "";
             cnpj.value = "";
             endereco.value = "";
-            setIdEmEdicao(0);
+            setIdEmEdicao("");
             setEditando(false);
         } else {
             alert("Preencha todos os campos!");
         }
     }
 
-    function handleExcluir(event) {
+    async function handleExcluir(event) {
         event.preventDefault();
 
         let updatedFornecedores = fornecedores.filter(fornecedor => fornecedor.id !== idEmEdicao);
         setFornecedores(updatedFornecedores);
+        console.log(idEmEdicao)
+        await excluirFornecedor(idEmEdicao);
         alert("Fornecedor excluído com sucesso!");
 
         document.getElementById("nome").value = "";
         document.getElementById("cnpj").value = "";
         document.getElementById("endereco").value = "";
-        setIdEmEdicao(0);
+        setIdEmEdicao("");
         setEditando(false);
     }
 

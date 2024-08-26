@@ -1,0 +1,21 @@
+@use '../1-base/_variables'
+
+.entrar 
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    height: 100vh
+
+    p
+        color: variables.$light-color
+        font-size: 1.3rem
+
+        span
+            color: variables.$grayish-blue
+            cursor: pointer
+            font-weight: bold
+            
+            &:hover
+                color: variables.$primary-color
+                text-decoration: underline
