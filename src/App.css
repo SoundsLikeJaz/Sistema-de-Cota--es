@@ -346,6 +346,27 @@ a:hover {
   text-align: center;
 }
 
+.entrar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.entrar p {
+  color: rgb(219, 234, 254);
+  font-size: 1.3rem;
+}
+.entrar p span {
+  color: rgb(156, 163, 175);
+  cursor: pointer;
+  font-weight: bold;
+}
+.entrar p span:hover {
+  color: rgb(37, 99, 235);
+  text-decoration: underline;
+}
+
 .menu {
   display: flex;
   justify-content: space-between;
@@ -433,6 +454,21 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-form h1 {
+  color: rgb(219, 234, 254);
+  margin-bottom: 2rem;
+}
+.login-form .button {
+  width: 7rem;
+  margin: -0.5em 0 2rem 0;
 }
 
 /*# sourceMappingURL=App.css.map */

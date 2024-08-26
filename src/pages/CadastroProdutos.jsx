@@ -1,22 +1,23 @@
 import { useContext, useState } from "react";
 import { ProdutosContext } from "../context";
 import { Button, DropDown, TextField } from "../components";
+import { atualizarProduto, excluirProduto, inserirProduto } from "../infra/produtos";
 
 const CadastroProdutos = () => {
 
     const { produtos, setProdutos } = useContext(ProdutosContext);
-    const [idEmEdicao, setIdEmEdicao] = useState(0);
+    const [idEmEdicao, setIdEmEdicao] = useState("");
     const [editando, setEditando] = useState(false);
 
     function handleSelect(event) {
-        setIdEmEdicao(parseInt(event.target.value));
-        let selected = produtos.find(produto => produto.id === parseInt(event.target.value));
+        setIdEmEdicao(event.target.value);
+        let selected = produtos.find(produto => produto.id === event.target.value);
         
         document.getElementById("produto").value = selected.nome;
         document.getElementById("marca").value = selected.marca;
     }
 
-    function handleCadastrar(event) {
+    async function handleCadastrar(event) {
         event.preventDefault();
 
         let nome = document.getElementById("produto");
@@ -24,11 +25,12 @@ const CadastroProdutos = () => {
 
         if (nome, marca) {
             let novoProduto = {
-                id: produtos.length + 1,
                 nome: nome.value,
                 marca: marca.value,
                 cotacoes: []
             }
+
+            await inserirProduto(novoProduto);
 
             setProdutos([...produtos, novoProduto]);
             alert("Produto cadastrado com sucesso!");
@@ -46,19 +48,25 @@ const CadastroProdutos = () => {
         setEditando(true);
     }
 
-    function handleSalvar(event) {
+    async function handleSalvar(event) {
         event.preventDefault();
 
         let nome = document.getElementById("produto");
         let marca = document.getElementById("marca");
 
-        if (nome, marca) {
-            let updatedProdutos = produtos.map(produto => {
+        if (nome && marca) {
+            const produtoAtualizado = {
+                nome: nome.value,
+                marca: marca.value
+            }
+
+            await atualizarProduto(idEmEdicao, produtoAtualizado);
+
+            const updatedProdutos = produtos.map(produto => {
                 if (produto.id === idEmEdicao) {
                     return {
-                        id: idEmEdicao,
-                        nome: nome.value,
-                        marca: marca.value
+                        ...produto,
+                        ...produtoAtualizado
                     }
                 } else {
                     return produto;
@@ -67,26 +75,26 @@ const CadastroProdutos = () => {
 
             setProdutos(updatedProdutos);
             alert("Produto salvo com sucesso!");
-            console.log(produtos[idEmEdicao - 1]);
 
             nome.value = "";
             marca.value = "";
             setEditando(false);
-            setIdEmEdicao(0);
+            setIdEmEdicao("");
         } else {
             alert("Preencha todos os campos!");
         }
     }
 
-    function handleExcluir(event) {
+    async function handleExcluir(event) {
         event.preventDefault();
 
         let updatedProdutos = produtos.filter(produto => produto.id !== idEmEdicao);
+        await excluirProduto(idEmEdicao);
         setProdutos(updatedProdutos);
         alert("Produto excluído com sucesso!");
 
         setEditando(false);
-        setIdEmEdicao(0);
+        setIdEmEdicao("");
     }
 
     return (
@@ -109,7 +117,7 @@ const CadastroProdutos = () => {
                                 <Button texto="Excluir" onClick={handleExcluir} />
                             </div>
                             <div className="dropdownWrapper">
-                                <DropDown label="Produtos" options={produtos} disabled="Selecione um Contato" onChange={handleSelect} />
+                                <DropDown label="Produtos" options={produtos} disabled="Selecione um Produto" onChange={handleSelect} />
                             </div>
                         </div>
                     )}

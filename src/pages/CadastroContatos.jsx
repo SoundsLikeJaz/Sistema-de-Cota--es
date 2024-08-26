@@ -1,20 +1,21 @@
 import { useContext, useState } from "react";
 import { FornecedoresContext } from "../context";
 import { Button, DropDown, TextField } from "../components";
+import { atualizarFornecedor } from "../infra/fornecedores";
 
 const CadastroContatos = () => {
 
     const { fornecedores, setFornecedores } = useContext(FornecedoresContext);
     const [selectedFornecedor, setSelectedFornecedor] = useState({});
-    const [idEmEdicao, setIdEmEdicao] = useState(0);
+    const [idEmEdicao, setIdEmEdicao] = useState("");
     const [editando, setEditando] = useState(false);
 
     function handleSelect(event) {
-        let selected = fornecedores.find(fornecedor => fornecedor.id === parseInt(event.target.value));
+        let selected = fornecedores.find(fornecedor => fornecedor.id === event.target.value);
         setSelectedFornecedor(selected);
     }
 
-    function handleCadastrar(event) {
+    async function handleCadastrar(event) {
         event.preventDefault();
 
         let nomeContato = document.getElementById("nomeContato");
@@ -33,6 +34,8 @@ const CadastroContatos = () => {
                 ...selectedFornecedor,
                 contatos: [...(selectedFornecedor.contatos || []), novoContato]
             }
+
+            await atualizarFornecedor(selectedFornecedor.id, updatedFornecedor);
 
             let updatedFornecedores = fornecedores.map(fornecedor => {
                 if (fornecedor.id === selectedFornecedor.id) {
@@ -73,7 +76,7 @@ const CadastroContatos = () => {
         contato.value = selected.contato;
     }
 
-    function handleSalvar(event) {
+    async function handleSalvar(event) {
         event.preventDefault();
 
         let nomeContato = document.getElementById("nomeContato");
@@ -99,6 +102,8 @@ const CadastroContatos = () => {
                 contatos: updatedContatos
             }
 
+            await atualizarFornecedor(selectedFornecedor.id, updatedFornecedor);
+
             let updatedFornecedores = fornecedores.map(fornecedor => {
                 if (fornecedor.id === selectedFornecedor.id) {
                     return updatedFornecedor;
@@ -121,7 +126,7 @@ const CadastroContatos = () => {
         }
     }
 
-    function handleExcluir(event) {
+    async function handleExcluir(event) {
         event.preventDefault();
 
         let updatedContatos = selectedFornecedor.contatos.filter(contato => contato.id !== idEmEdicao);
@@ -130,6 +135,8 @@ const CadastroContatos = () => {
             ...selectedFornecedor,
             contatos: updatedContatos
         }
+
+        await atualizarFornecedor(selectedFornecedor.id, updatedFornecedor);
 
         document.getElementById("nomeContato").value = "";
         document.getElementById("tipo").value = "";

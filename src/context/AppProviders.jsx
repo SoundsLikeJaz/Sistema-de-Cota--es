@@ -1,13 +1,16 @@
 import { FornecedoresProvider } from "./FornecedoresContext"
 import { ProdutosProvider } from "./ProdutosContext"
+import {UsuariosProvider} from "./UsuariosContext";
 
 const AppProviders = ({ children }) => {
     return (
-        <ProdutosProvider>
-            <FornecedoresProvider>
-                {children}
-            </FornecedoresProvider>
-        </ProdutosProvider>
+        <UsuariosProvider>
+            <ProdutosProvider>
+                <FornecedoresProvider>
+                    {children}
+                </FornecedoresProvider>
+            </ProdutosProvider>
+        </UsuariosProvider>
     );
 }
 

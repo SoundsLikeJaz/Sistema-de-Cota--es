@@ -38,9 +38,9 @@ const TextField = ({ label = "Label", inputType = "text", placeholder, id }) => 
                     <div
                         style={{
                             fontSize: "2em",
-                            position: "absolute",
+                            position: "relative",
                             justifySelf: "flex-end",
-                            top: "1.9em",
+                            top: "-1.25em",
                             cursor: "pointer",
                             paddingRight: "0.2em"
                         }}
@@ -62,7 +62,7 @@ const TextField = ({ label = "Label", inputType = "text", placeholder, id }) => 
     }
 
     return (
-        <Label htmlFor="input" labelText={label}>
+        <Label htmlFor="input" labelText={label} >
             {handleInput()}
         </Label>
     );
