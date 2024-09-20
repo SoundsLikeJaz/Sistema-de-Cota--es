@@ -11,7 +11,6 @@ const CadastroFornecedores = () => {
 
     function handleSelect(event) {
         let selected = fornecedores.find(fornecedor => fornecedor.id === event.target.value);
-        setIdEmEdicao(selected.id);
 
         let nome = document.getElementById("nome");
         let cnpj = document.getElementById("cnpj");
