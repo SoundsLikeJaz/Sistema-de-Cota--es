@@ -1,13 +1,16 @@
 import { FornecedoresProvider } from "./FornecedoresContext"
 import { ProdutosProvider } from "./ProdutosContext"
-import {UsuariosProvider} from "./UsuariosContext";
+import { RequisicoesProvider } from "./RequisicoesContext";
+import { UsuariosProvider } from "./UsuariosContext";
 
 const AppProviders = ({ children }) => {
     return (
         <UsuariosProvider>
             <ProdutosProvider>
                 <FornecedoresProvider>
-                    {children}
+                    <RequisicoesProvider>
+                        {children}
+                    </RequisicoesProvider>
                 </FornecedoresProvider>
             </ProdutosProvider>
         </UsuariosProvider>

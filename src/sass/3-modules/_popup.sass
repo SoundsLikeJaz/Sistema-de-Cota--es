@@ -1,0 +1,95 @@
+@use '../1-base/variables'
+    
+.popup
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.5)
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
+
+    &-inner
+        background-color: variables.$light-color
+        padding: 2rem
+        border-radius: 0.5rem
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+        min-width: 40%
+        min-height: 30%
+        max-width: 80%
+        max-height: 80%
+        overflow-y: auto
+        overflow-x: hidden
+        scrollbar-width: none
+        -ms-overflow-style: none
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        .labelCard
+            label
+                color: variables.$secondary-color
+
+        &::-webkit-scrollbar
+            display: none
+
+    &-header
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: 1rem
+        font-size: 1.5rem
+
+        & h2
+            text-align: center
+            width: 100%
+            color: variables.$primary-color
+
+    &-closer
+        display: grid
+        width: 100%
+
+        & button
+            background-color: transparent
+            border: none
+            font-size: 2rem
+            cursor: pointer
+            position: relative
+            justify-self: flex-end
+            color: red
+            margin: -1.5rem -1rem
+
+            &:hover
+                color: darkred
+
+    &-content
+        margin: 1rem
+        display: flex
+        flex-direction: column
+        align-items: center
+        color: black
+        width: 100%
+
+        & .dropdown
+            width: 100%
+            height: 3rem
+            font-size: 1.2rem
+
+        & .input
+            width: 100%
+            min-width: 35vw
+            font-size: 1.2rem
+
+        & .button-container
+            display: flex
+            justify-content: center
+            align-items: center
+            width: 100%
+            margin-top: -1rem
+
+            & .button
+                font-size: 1.2rem

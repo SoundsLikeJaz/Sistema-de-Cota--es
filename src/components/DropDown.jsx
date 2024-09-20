@@ -1,10 +1,10 @@
 import Label from './Label';
 
-const DropDown = ({ label, options, onChange, disabled }) => {
+const DropDown = ({ label, options, onChange, disabled, value }) => {
 
     return (
         <Label htmlFor="dropdown" labelText={label}>
-            <select name="dropdown" className="dropdown" defaultValue="" onChange={onChange}>
+            <select name="dropdown" className="dropdown" value={value} onChange={onChange}>
                 <option value="" disabled>{disabled}</option>
                 {options.map(option => (
                     <option value={option.id} key={option.id}>

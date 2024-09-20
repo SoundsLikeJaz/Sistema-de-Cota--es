@@ -9,9 +9,12 @@ const CadastroContatos = () => {
     const [selectedFornecedor, setSelectedFornecedor] = useState({});
     const [idEmEdicao, setIdEmEdicao] = useState("");
     const [editando, setEditando] = useState(false);
+    const [dropdownFornecedorValue, setDropdownFornecedorValue] = useState("");
+    const [dropdownContatoValue, setDropdownContatoValue] = useState("");
 
     function handleSelect(event) {
         let selected = fornecedores.find(fornecedor => fornecedor.id === event.target.value);
+        setDropdownFornecedorValue(event.target.value);
         setSelectedFornecedor(selected);
     }
 
@@ -52,6 +55,8 @@ const CadastroContatos = () => {
             nomeContato.value = "";
             tipo.value = "";
             contato.value = "";
+            setDropdownFornecedorValue("");
+            setSelectedFornecedor({});
         } else {
             alert("Preencha todos os campos!");
         }
@@ -66,6 +71,7 @@ const CadastroContatos = () => {
     function handleSelectContato(event) {
         let selected = selectedFornecedor.contatos.find(contato => contato.id === parseInt(event.target.value));
         setIdEmEdicao(selected.id);
+        setDropdownContatoValue(event.target.value);
 
         let nomeContato = document.getElementById("nomeContato");
         let tipo = document.getElementById("tipo");
@@ -121,6 +127,9 @@ const CadastroContatos = () => {
             nomeContato.value = "";
             contatoValor.value = "";
             tipo.value = "";
+            setDropdownFornecedorValue("");
+            setDropdownContatoValue("");
+            setSelectedFornecedor({});
         } else {
             alert("Preencha todos os campos!");
         }
@@ -156,6 +165,9 @@ const CadastroContatos = () => {
 
         setEditando(false);
         setIdEmEdicao(0);
+        setDropdownFornecedorValue("");
+        setDropdownContatoValue("");
+        setSelectedFornecedor({});
     }
 
     return (
@@ -163,7 +175,7 @@ const CadastroContatos = () => {
             <h1>Cadastro de Contatos</h1>
 
             <div className="dropdownWrapper">
-                <DropDown label="Fornecedor" options={fornecedores} disabled="Selecione um Fornecedor" onChange={handleSelect} />
+                <DropDown label="Fornecedor" options={fornecedores} disabled="Selecione um Fornecedor" value={dropdownFornecedorValue} onChange={handleSelect} />
             </div>
             {selectedFornecedor.id && (
                 <form>
@@ -184,7 +196,7 @@ const CadastroContatos = () => {
                                     <Button texto="Excluir" onClick={handleExcluir} />
                                 </div>
                                 <div className="dropdownWrapper">
-                                    <DropDown label="Contatos" options={selectedFornecedor.contatos} disabled="Selecione um Contato" onChange={handleSelectContato} />
+                                    <DropDown label="Contatos" options={selectedFornecedor.contatos} disabled="Selecione um Contato" value={dropdownContatoValue} onChange={handleSelectContato} />
                                 </div>
                             </div>
                         )}

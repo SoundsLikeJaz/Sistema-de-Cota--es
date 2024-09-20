@@ -8,35 +8,34 @@ const CadastroProdutos = () => {
     const { produtos, setProdutos } = useContext(ProdutosContext);
     const [idEmEdicao, setIdEmEdicao] = useState("");
     const [editando, setEditando] = useState(false);
+    const [dropdownValue, setDropdownValue] = useState("");
 
     function handleSelect(event) {
         setIdEmEdicao(event.target.value);
+        setDropdownValue(event.target.value);
         let selected = produtos.find(produto => produto.id === event.target.value);
         
         document.getElementById("produto").value = selected.nome;
-        document.getElementById("marca").value = selected.marca;
     }
 
     async function handleCadastrar(event) {
         event.preventDefault();
 
         let nome = document.getElementById("produto");
-        let marca = document.getElementById("marca");
 
-        if (nome, marca) {
+        if (nome) {
             let novoProduto = {
                 nome: nome.value,
-                marca: marca.value,
-                cotacoes: []
             }
 
-            await inserirProduto(novoProduto);
+            const id = await inserirProduto(novoProduto);
+            novoProduto.id = id;
 
             setProdutos([...produtos, novoProduto]);
             alert("Produto cadastrado com sucesso!");
 
             nome.value = "";
-            marca.value = "";
+            setDropdownValue("");
         } else {
             alert("Preencha todos os campos!");
         }
@@ -52,12 +51,10 @@ const CadastroProdutos = () => {
         event.preventDefault();
 
         let nome = document.getElementById("produto");
-        let marca = document.getElementById("marca");
 
-        if (nome && marca) {
+        if (nome) {
             const produtoAtualizado = {
                 nome: nome.value,
-                marca: marca.value
             }
 
             await atualizarProduto(idEmEdicao, produtoAtualizado);
@@ -77,9 +74,9 @@ const CadastroProdutos = () => {
             alert("Produto salvo com sucesso!");
 
             nome.value = "";
-            marca.value = "";
             setEditando(false);
             setIdEmEdicao("");
+            setDropdownValue("");
         } else {
             alert("Preencha todos os campos!");
         }
@@ -95,6 +92,8 @@ const CadastroProdutos = () => {
 
         setEditando(false);
         setIdEmEdicao("");
+        document.getElementById("produto").value = "";
+        setDropdownValue("");
     }
 
     return (
@@ -102,7 +101,6 @@ const CadastroProdutos = () => {
             <h1>Cadastro de Produtos</h1>
             <form>
                 <TextField id="produto" inputType="text" placeholder="Nome do Produto" label="Produto" />
-                <TextField id="marca" inputType="text" placeholder="Marca" label="Marca" />
                 {!editando ?
                     (
                         <div className="botoes">
@@ -117,7 +115,7 @@ const CadastroProdutos = () => {
                                 <Button texto="Excluir" onClick={handleExcluir} />
                             </div>
                             <div className="dropdownWrapper">
-                                <DropDown label="Produtos" options={produtos} disabled="Selecione um Produto" onChange={handleSelect} />
+                                <DropDown label="Produtos" options={produtos} value={dropdownValue} disabled="Selecione um Produto" onChange={handleSelect} />
                             </div>
                         </div>
                     )}
