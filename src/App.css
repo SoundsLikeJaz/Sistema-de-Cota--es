@@ -190,141 +190,98 @@ a:hover {
   font-size: 1.2rem;
 }
 
-.cadastroCotacoes {
+.cadastroRequisicoes {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
-  padding-bottom: 2.5rem;
 }
-.cadastroCotacoes h1 {
+.cadastroRequisicoes h1 {
   color: rgb(37, 99, 235);
   margin-top: 5rem;
+  font-size: 5rem;
 }
-.cadastroCotacoes form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-}
-.cadastroCotacoes form .wrapper {
-  width: 100%;
-}
-.cadastroCotacoes form .wrapper .input {
-  width: 50%;
-}
-.cadastroCotacoes form .botoes {
-  display: flex;
-  justify-content: space-evenly;
-  width: 50%;
-}
-.cadastroCotacoes form .botoes .button {
-  width: 33%;
-  font-size: 1.2rem;
-}
-.cadastroCotacoes form .editor {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-}
-.cadastroCotacoes form .editor .dropdownWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3.5rem;
-}
-.cadastroCotacoes form .editor .dropdownWrapper .dropdown {
-  height: 3rem;
-  width: 100%;
-  font-size: 1.2rem;
-}
-.cadastroCotacoes form .editor .botoes {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-.cadastroCotacoes form .editor .dropdownWrapper {
-  width: 100%;
-}
-.cadastroCotacoes form .editor .dropdownWrapper .dropdown {
-  height: 3rem;
-  width: 100%;
-  font-size: 1.2rem;
-}
-.cadastroCotacoes .dropdownWrapper {
-  width: 100%;
-}
-.cadastroCotacoes .dropdownWrapper .dropdown {
-  height: 3rem;
-  width: 50%;
+.cadastroRequisicoes .button {
+  width: 14rem;
   font-size: 1.2rem;
 }
 
-.consulta {
+.controleUsuarios {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
-  padding-bottom: 2.5rem;
 }
-.consulta h1 {
+.controleUsuarios .botaoCadastro .button {
+  font-size: 1.25rem;
+}
+.controleUsuarios .checkboxAdmin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+}
+.controleUsuarios .checkboxAdmin input {
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+}
+.controleUsuarios h1 {
   color: rgb(37, 99, 235);
   margin-top: 5rem;
 }
-.consulta .listagemCotacoes {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  list-style: none;
+.controleUsuarios table {
+  width: 80vw;
+  border-collapse: collapse;
+  border: 1px solid red;
+  background-color: rgb(219, 234, 254);
 }
-.consulta .listagemCotacoes .cotacaoCard {
-  width: 100%;
-  border-bottom: 1px solid rgb(156, 163, 175);
-  padding: 1rem;
+.controleUsuarios table thead tr th {
+  background-color: rgb(29, 78, 216);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
-.consulta .listagemCotacoes .cotacaoCard h2 {
-  color: rgb(29, 78, 216);
+.controleUsuarios table th, .controleUsuarios table td {
+  border: 2px solid rgb(29, 78, 216);
+  padding: 10px;
   text-align: center;
+  text-align-font-size: 1.2rem;
 }
-.consulta .listagemCotacoes .cotacaoCard ul {
-  list-style: none;
-}
-.consulta .listagemCotacoes .cotacaoCard ul li {
-  background-color: darkblue;
-}
-.consulta .listagemCotacoes .cotacaoCard .cotacaoInfo {
-  margin-top: 1rem;
+.controleUsuarios table .checkbox div {
   display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-  color: rgb(219, 234, 254);
-  flex-wrap: wrap;
-}
-.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
-.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorInfo {
+.controleUsuarios table .checkbox div input {
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+}
+
+.controleRequisicoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.controleRequisicoes h1 {
+  color: rgb(37, 99, 235);
+  margin-top: 5rem;
+}
+.controleRequisicoes .listaCotacoes table {
   width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 0.5rem;
-  color: rgb(219, 234, 254);
-  margin-top: 1rem;
 }
-.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorContatos {
-  width: 80%;
+.controleRequisicoes .cotacoesListaWrapper {
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.consulta .listagemCotacoes .cotacaoCard .cotacaoFornecedor .fornecedorContatos p {
-  color: rgb(219, 234, 254);
-  margin: 0.5rem;
+.controleRequisicoes .cotacoesListaWrapper p {
+  color: rgb(37, 99, 235);
+  font-size: 1.3rem;
+  text-align: center;
 }
 
 .home {
@@ -469,6 +426,149 @@ a:hover {
 .login-form .button {
   width: 7rem;
   margin: -0.5em 0 2rem 0;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.popup-inner {
+  background-color: rgb(219, 234, 254);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  min-width: 40%;
+  min-height: 30%;
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popup-inner .labelCard label {
+  color: rgb(29, 78, 216);
+}
+.popup-inner::-webkit-scrollbar {
+  display: none;
+}
+.popup-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+.popup-header h2 {
+  text-align: center;
+  width: 100%;
+  color: rgb(37, 99, 235);
+}
+.popup-closer {
+  display: grid;
+  width: 100%;
+}
+.popup-closer button {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+  justify-self: flex-end;
+  color: red;
+  margin: -1.5rem -1rem;
+}
+.popup-closer button:hover {
+  color: darkred;
+}
+.popup-content {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  width: 100%;
+}
+.popup-content .dropdown {
+  width: 100%;
+  height: 3rem;
+  font-size: 1.2rem;
+}
+.popup-content .input {
+  width: 100%;
+  min-width: 35vw;
+  font-size: 1.2rem;
+}
+.popup-content .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: -1rem;
+}
+.popup-content .button-container .button {
+  font-size: 1.2rem;
+}
+
+.listaRequisicoes {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.listaRequisicoes table {
+  width: 80vw;
+  border-collapse: collapse;
+  border: 1px solid red;
+  background-color: rgb(219, 234, 254);
+}
+.listaRequisicoes table thead tr th {
+  background-color: rgb(29, 78, 216);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.listaRequisicoes table th, .listaRequisicoes table td {
+  border: 2px solid rgb(29, 78, 216);
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.listaRequisicoes table th .status, .listaRequisicoes table td .status {
+  font-weight: bold;
+}
+.listaRequisicoes table th .aberta, .listaRequisicoes table td .aberta {
+  color: rgb(37, 99, 235);
+}
+.listaRequisicoes table th .emCotacao, .listaRequisicoes table td .emCotacao {
+  color: orange;
+}
+.listaRequisicoes table th .cotada, .listaRequisicoes table td .cotada {
+  color: green;
+}
+.listaRequisicoes table th button, .listaRequisicoes table td button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.listaRequisicoes table th .edit, .listaRequisicoes table td .edit {
+  color: blue;
+}
+.listaRequisicoes table th .delete, .listaRequisicoes table td .delete {
+  color: red;
 }
 
 /*# sourceMappingURL=App.css.map */

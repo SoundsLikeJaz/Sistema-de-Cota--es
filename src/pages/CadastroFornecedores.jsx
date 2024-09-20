@@ -8,11 +8,13 @@ const CadastroFornecedores = () => {
     const { fornecedores, setFornecedores } = useContext(FornecedoresContext);
     const [ idEmEdicao, setIdEmEdicao ] = useState("");
     const [ editando, setEditando ] = useState(false);
+    const [ dropdownValue, setDropdownValue ] = useState("");
 
     function handleSelect(event) {
         let selected = fornecedores.find(fornecedor => fornecedor.id === event.target.value);
-        setIdEmEdicao(selected.id);
+        setDropdownValue(event.target.value);
 
+        setIdEmEdicao(selected.id);
         let nome = document.getElementById("nome");
         let cnpj = document.getElementById("cnpj");
         let endereco = document.getElementById("endereco");
@@ -37,8 +39,11 @@ const CadastroFornecedores = () => {
                 contatos: [],
             }
 
+            let sucesso = await inserirFornecedor(fornecedor);
+
+            fornecedor.id = sucesso;
+
             setFornecedores([...fornecedores, fornecedor]);
-            const sucesso = await inserirFornecedor(fornecedor);
             sucesso ? alert("Fornecedor cadastrado com sucesso!") : alert("Erro ao cadastrar fornecedor!");
 
             nome.value = "";
@@ -90,6 +95,7 @@ const CadastroFornecedores = () => {
             endereco.value = "";
             setIdEmEdicao("");
             setEditando(false);
+            setDropdownValue("");
         } else {
             alert("Preencha todos os campos!");
         }
@@ -100,7 +106,6 @@ const CadastroFornecedores = () => {
 
         let updatedFornecedores = fornecedores.filter(fornecedor => fornecedor.id !== idEmEdicao);
         setFornecedores(updatedFornecedores);
-        console.log(idEmEdicao)
         await excluirFornecedor(idEmEdicao);
         alert("Fornecedor excluído com sucesso!");
 
@@ -109,6 +114,7 @@ const CadastroFornecedores = () => {
         document.getElementById("endereco").value = "";
         setIdEmEdicao("");
         setEditando(false);
+        setDropdownValue("");
     }
 
     return (
@@ -132,7 +138,7 @@ const CadastroFornecedores = () => {
                                 <Button texto="Excluir" onClick={handleExcluir} />
                             </div>
                             <div className="dropdownWrapper">
-                                <DropDown label="Fornecedor" options={fornecedores} disabled="Selecione um Fornecedor" onChange={handleSelect} />
+                                <DropDown label="Fornecedor" options={fornecedores} disabled="Selecione um Fornecedor" value={dropdownValue} onChange={handleSelect} />
                             </div>
                         </div>
                     )}

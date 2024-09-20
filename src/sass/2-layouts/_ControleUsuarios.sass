@@ -1,0 +1,55 @@
+@use '../1-base/variables'
+
+.controleUsuarios
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 2.5rem
+
+    .botaoCadastro .button
+        font-size: 1.25rem
+
+    .checkboxAdmin
+        display: flex
+        justify-content: center
+        align-items: center
+        gap: 0.5rem
+        font-size: 1.25rem
+
+        input
+            width: 1.3rem
+            height: 1.3rem
+            cursor: pointer
+        
+    & h1
+        color: variables.$primary-color
+        margin-top: variables.$afastamento
+
+    & table
+        width: 80vw
+        border-collapse: collapse
+        border: 1px solid red
+        background-color: variables.$light-color
+
+        thead tr th
+            background-color: variables.$secondary-color
+            color: white
+            font-size: 1.5rem
+            font-weight: bold
+
+        th, td
+            border: 2px solid variables.$secondary-color
+            padding: 10px
+            text-align: center
+                        font-size: 1.2rem
+
+        .checkbox div
+            display: flex
+            justify-content: center
+            align-items: center
+            gap: 0.5rem
+            
+            input
+                width: 1.3rem
+                height: 1.3rem
+                cursor: pointer

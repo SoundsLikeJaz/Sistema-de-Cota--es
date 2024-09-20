@@ -1,4 +1,4 @@
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 export async function inserirUsuario(novoUsuario) {
@@ -13,6 +13,23 @@ export async function obterUsuario(id) {
     return docSnap.data();
 }
 
+export async function listarUsuarios() {
+    let retorno;
+    await getDocs(collection(db, "users"))
+        .then((querySnapshot) => {
+            retorno = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        });
+
+        retorno = retorno.filter(c => !c.isAdmin);
+
+        return retorno;
+    }
+
 export async function excluirUsuario(id) {
     await deleteDoc(doc(db, "users", id));
+}
+
+export async function atualizarUsuario(id, novosDados) {
+    const docRef = doc(db, "users", id);
+    await updateDoc(docRef, novosDados);
 }

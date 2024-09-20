@@ -1,0 +1,50 @@
+@use '../1-base/variables'
+
+.listaRequisicoes
+    margin-top: 4rem
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    table
+        width: 80vw
+        border-collapse: collapse
+        border: 1px solid red
+        background-color: variables.$light-color
+
+        thead tr th
+            background-color: variables.$secondary-color
+            color: white
+            font-size: 1.5rem
+            font-weight: bold
+
+        th, td
+            border: 2px solid variables.$secondary-color
+            padding: 10px
+            text-align: center
+            font-size: 1.2rem
+            
+
+            .status
+                font-weight: bold
+
+            .aberta
+                color: variables.$primary-color
+
+            .emCotacao
+                color: orange
+
+            .cotada
+                color: green
+
+            button
+                background-color: transparent
+                border: none
+                font-size: 1.4rem
+                cursor: pointer
+
+            .edit
+                color: blue
+
+            .delete
+                color: red

@@ -2,7 +2,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import Label from "./Label";
 
-const TextField = ({ label = "Label", inputType = "text", placeholder, id }) => {
+const TextField = ({ label = "Label", inputType = "text", placeholder, id, value, onChange }) => {
     const [senhaVisivel, setSenhaVisivel] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
@@ -21,7 +21,9 @@ const TextField = ({ label = "Label", inputType = "text", placeholder, id }) => 
                 placeholder={placeholder}
                 className="input textarea"
                 id={id}
-                maxLength={100}
+                maxLength={50}
+                value={value}
+                onChange={onChange}
                 />
             );
         } else if (inputType === "password") {
@@ -56,6 +58,8 @@ const TextField = ({ label = "Label", inputType = "text", placeholder, id }) => 
                     placeholder={placeholder}
                     type={inputType}
                     id={id}
+                    value={value}
+                    onChange={onChange}
                 />
             );
         }
