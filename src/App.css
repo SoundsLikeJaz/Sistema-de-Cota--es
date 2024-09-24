@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: rgb(55, 65, 81);
+  background-color: rgb(5, 15, 78);
 }
 
 h1 {
@@ -144,50 +144,8 @@ a:hover {
   color: rgb(37, 99, 235);
   margin-top: 5rem;
 }
-.cadastroProdutos form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-}
-.cadastroProdutos form .wrapper {
-  width: 100%;
-}
-.cadastroProdutos form .wrapper .input {
-  width: 50%;
-}
-.cadastroProdutos form .editor {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-}
-.cadastroProdutos form .editor .dropdownWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3.5rem;
-}
-.cadastroProdutos form .editor .dropdownWrapper .dropdown {
-  height: 3rem;
-  width: 100%;
-  font-size: 1.2rem;
-}
-.cadastroProdutos form .editor .botoes {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-.cadastroProdutos form .botoes {
-  display: flex;
-  justify-content: space-evenly;
-  width: 50%;
-}
-.cadastroProdutos form .botoes .button {
-  width: 33%;
-  font-size: 1.2rem;
-}
-.cadastroProdutos .button {
-  width: 30%;
-  font-size: 1.2rem;
+.cadastroProdutos .botaoCadastro .button {
+  font-size: 1.25rem;
 }
 
 .cadastroRequisicoes {
@@ -557,6 +515,11 @@ a:hover {
 }
 .listaRequisicoes table th .cotada, .listaRequisicoes table td .cotada {
   color: green;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
 }
 .listaRequisicoes table th button, .listaRequisicoes table td button {
   background-color: transparent;

@@ -1,31 +1,61 @@
 import { useContext, useState } from "react";
 import { ProdutosContext } from "../context";
-import { Button, DropDown, TextField } from "../components";
+import { Button, Popup, Tabela, TextField } from "../components";
 import { atualizarProduto, excluirProduto, inserirProduto } from "../infra/produtos";
+import { AiFillDelete, AiOutlineDelete } from "react-icons/ai";
+import { FaEdit, FaRegEdit } from "react-icons/fa";
 
 const CadastroProdutos = () => {
 
     const { produtos, setProdutos } = useContext(ProdutosContext);
-    const [idEmEdicao, setIdEmEdicao] = useState("");
-    const [editando, setEditando] = useState(false);
-    const [dropdownValue, setDropdownValue] = useState("");
+    const [mostrarPopup, setMostrarPopup] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [objEmEdicao, setObjEmEdicao] = useState(null);
+    const [valor, setValor] = useState(null);
 
-    function handleSelect(event) {
-        setIdEmEdicao(event.target.value);
-        setDropdownValue(event.target.value);
-        let selected = produtos.find(produto => produto.id === event.target.value);
-        
-        document.getElementById("produto").value = selected.nome;
+    const [hoverEditarIndex, setHoverEditarIndex] = useState(null);
+    const [hoverExcluirIndex, setHoverExcluirIndex] = useState(null);
+
+    function gerarData() {
+        return produtos.map((produto, index) => (
+            <tr key={produto.id}>
+                <td>{produto.nome}</td>
+                <td>
+                    <button
+                        className="edit"
+                        onMouseEnter={() => setHoverEditarIndex(index)}
+                        onMouseLeave={() => setHoverEditarIndex(null)}
+                        onClick={() => handleEditar(produto)}
+                    >
+                        {
+                            hoverEditarIndex === index ? <FaEdit /> : <FaRegEdit />
+                        }
+                    </button>
+                </td>
+                <td>
+                    <button
+                        className="delete"
+                        onMouseEnter={() => setHoverExcluirIndex(index)}
+                        onMouseLeave={() => setHoverExcluirIndex(null)}
+                        onClick={() => handleExcluir(produto)}
+                    >
+                        {
+                            hoverExcluirIndex === index ? <AiFillDelete /> : <AiOutlineDelete />
+                        }
+                    </button>
+                </td>
+            </tr>
+        ));
     }
 
     async function handleCadastrar(event) {
         event.preventDefault();
 
-        let nome = document.getElementById("produto");
+        let nome = valor;
 
         if (nome) {
             let novoProduto = {
-                nome: nome.value,
+                nome: nome,
             }
 
             const id = await inserirProduto(novoProduto);
@@ -34,33 +64,32 @@ const CadastroProdutos = () => {
             setProdutos([...produtos, novoProduto]);
             alert("Produto cadastrado com sucesso!");
 
-            nome.value = "";
-            setDropdownValue("");
+            closePopup();
         } else {
-            alert("Preencha todos os campos!");
+            setErrorMessage("Preencha todos os campos!");
         }
     }
 
-    function handleEditar(event) {
-        event.preventDefault();
-
-        setEditando(true);
+    function handleEditar(produto) {
+        setObjEmEdicao(produto);
+        setValor(produto.nome);
+        setMostrarPopup(true);
     }
 
     async function handleSalvar(event) {
         event.preventDefault();
 
-        let nome = document.getElementById("produto");
+        let nome = valor;
 
         if (nome) {
             const produtoAtualizado = {
-                nome: nome.value,
+                nome: nome
             }
 
-            await atualizarProduto(idEmEdicao, produtoAtualizado);
+            await atualizarProduto(objEmEdicao.id, produtoAtualizado);
 
             const updatedProdutos = produtos.map(produto => {
-                if (produto.id === idEmEdicao) {
+                if (produto.id === objEmEdicao.id) {
                     return {
                         ...produto,
                         ...produtoAtualizado
@@ -73,53 +102,53 @@ const CadastroProdutos = () => {
             setProdutos(updatedProdutos);
             alert("Produto salvo com sucesso!");
 
-            nome.value = "";
-            setEditando(false);
-            setIdEmEdicao("");
-            setDropdownValue("");
+            closePopup();
         } else {
-            alert("Preencha todos os campos!");
+            setErrorMessage("Preencha todos os campos!");
         }
     }
 
-    async function handleExcluir(event) {
-        event.preventDefault();
+    async function handleExcluir(produto) {
+        const confirmacao = window.confirm("Tem certeza que deseja excluir este produto?");
+        if (confirmacao) {
+            await excluirProduto(produto.id);
 
-        let updatedProdutos = produtos.filter(produto => produto.id !== idEmEdicao);
-        await excluirProduto(idEmEdicao);
-        setProdutos(updatedProdutos);
-        alert("Produto excluído com sucesso!");
+            const updatedProdutos = produtos.filter(p => p.id !== produto.id);
+            setProdutos(updatedProdutos);
 
-        setEditando(false);
-        setIdEmEdicao("");
-        document.getElementById("produto").value = "";
-        setDropdownValue("");
+            alert("Produto excluído com sucesso!");
+
+            closePopup();
+        }
+    }
+
+    function closePopup() {
+        setMostrarPopup(false);
+        setErrorMessage("");
+        setObjEmEdicao(null);
+        setValor("");
     }
 
     return (
         <div className="cadastroProdutos">
-            <h1>Cadastro de Produtos</h1>
-            <form>
-                <TextField id="produto" inputType="text" placeholder="Nome do Produto" label="Produto" />
-                {!editando ?
-                    (
-                        <div className="botoes">
-                            <Button texto="Cadastrar" onClick={handleCadastrar} />
-                            <Button texto="Editar" onClick={handleEditar} />
+            {mostrarPopup && (
+                <Popup title="Cadastrar Produto" onClose={closePopup}>
+                    <form>
+                        <TextField label="Nome" inputType="text" placeholder="Nome do produto" value={valor} onChange={(event) => setValor(event.target.value)} />
+                        {errorMessage && <p className="error">{errorMessage}</p>}
+
+                        <br />
+                        <div className="button-container">
+                            <Button texto={objEmEdicao ? "Salvar alterações" : "Cadastrar produto"} onClick={objEmEdicao ? handleSalvar : handleCadastrar} />
                         </div>
-                    )
-                    : (
-                        <div className="editor">
-                            <div className="botoes">
-                                <Button texto="Salvar" onClick={handleSalvar} />
-                                <Button texto="Excluir" onClick={handleExcluir} />
-                            </div>
-                            <div className="dropdownWrapper">
-                                <DropDown label="Produtos" options={produtos} value={dropdownValue} disabled="Selecione um Produto" onChange={handleSelect} />
-                            </div>
-                        </div>
-                    )}
-            </form>
+                    </form>
+                </Popup>
+            )}
+            <h1>Produtos</h1>
+            <div className="botaoCadastro">
+                <Button onClick={() => setMostrarPopup(true)} texto="Cadastrar novo produto" />
+            </div>
+            <Tabela cabecalho={["Nome", "Editar", "Excluir"]} gerarDados={gerarData} />
         </div>
     );
 }

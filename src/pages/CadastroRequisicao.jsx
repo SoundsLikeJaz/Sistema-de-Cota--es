@@ -64,7 +64,7 @@ const CadastroRequisicao = () => {
         const produtoId = dropdownValue;
         const produto = produtos.find(produto => produto.id === produtoId);
 
-        if (!produto) {
+        if (!produto && produtoId !== "naoCadastrado") {
             setErrorMessage("Selecione um produto para fazer a requisição!");
             return;
         }
