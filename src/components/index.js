@@ -5,6 +5,7 @@ export { default as TextField } from './TextField';
 export { default as ListarRequisicao } from './listarrequisicao';
 export { default as ListaControleRequisicoes } from './listacontrolerequisicoes';
 export { default as ListarCotacoes } from './listarcotacoes';
+export { default as Tabela } from './tabela';
 export { default as Popup } from './popup';
 export { default as LoginForm } from './LoginForm';
 export { default as CreateAccountForm } from './CreateAccountForm';

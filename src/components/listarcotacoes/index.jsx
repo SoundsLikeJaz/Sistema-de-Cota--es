@@ -19,13 +19,13 @@ export default function ListarCotacoes({ requisicao, requisicoes, setRequisicoes
 
     function encontrarFornecedor(id) {
         const fornecedor = fornecedores.find(fornecedor => fornecedor.id === id);
-        return id === "naoCadastrado" ? "Fornecedor excluído" : fornecedor.nome;
+        return id === "naoCadastrado" ? "Fornecedor desconhecido" : fornecedor.nome;
     }
 
     function formatarData(data) {
         const dataObj = new Date(data);
         const dataCorrigida = new Date(dataObj.getTime() + dataObj.getTimezoneOffset() * 60000);
-    
+
         return dataCorrigida.toLocaleDateString("pt-BR", {
             day: "2-digit",
             month: "2-digit",
@@ -72,7 +72,7 @@ export default function ListarCotacoes({ requisicao, requisicoes, setRequisicoes
                                     <tr key={index}>
                                         {requisicao.produtoId === "naoCadastrado" && <td>{encontrarProduto(cotacao.produtoId)}</td>}
                                         <td>{encontrarFornecedor(cotacao.fornecedorId)}</td>
-                                        <td>{cotacao.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
+                                        <td>R$ {cotacao.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
                                         <td>{formatarData(cotacao.data)}</td>
                                         <td>
                                             <button

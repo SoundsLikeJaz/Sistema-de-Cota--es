@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "export-from-json": "^1.7.4",
     "firebase": "^10.13.0",
+    "json2csv": "^6.0.0-alpha.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",

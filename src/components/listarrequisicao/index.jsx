@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
-import { ProdutosContext } from "../../context";
+import { FornecedoresContext, ProdutosContext } from "../../context";
 import { FaEdit, FaRegEdit } from "react-icons/fa";
 import { AiFillDelete, AiOutlineDelete } from "react-icons/ai";
+import { IoMdDownload } from "react-icons/io";
 import { excluirRequisicao } from "../../infra/requisicoes";
+import exportFromJSON from 'export-from-json';
+
 
 export default function ListarRequisicao({ requisicoes, setRequisicoes, editor }) {
 
     const { produtos } = useContext(ProdutosContext);
+    const { fornecedores } = useContext(FornecedoresContext);
 
     const [hoverEditarIndex, setHoverEditarIndex] = useState(null);
     const [hoverExcluirIndex, setHoverExcluirIndex] = useState(null);
@@ -16,10 +20,16 @@ export default function ListarRequisicao({ requisicoes, setRequisicoes, editor }
         return id === "naoCadastrado" ? "Produto não cadastrado" : produto.nome;
     }
 
+    function encontrarFornecedor(id) {
+        const fornecedor = fornecedores.find(fornecedor => fornecedor.id === id);
+        console.log(fornecedor);
+        return id === "naoCadastrado" ? "Fornecedor desconhecido" : fornecedor.nome;
+    }
+
     function formatarData(data) {
         const dataObj = new Date(data);
         const dataCorrigida = new Date(dataObj.getTime() + dataObj.getTimezoneOffset() * 60000);
-    
+
         return dataCorrigida.toLocaleDateString("pt-BR", {
             day: "2-digit",
             month: "2-digit",
@@ -27,13 +37,27 @@ export default function ListarRequisicao({ requisicoes, setRequisicoes, editor }
         });
     }
 
+    function baixarCSV(requisicao) {
+        const data = requisicao.cotacoes.map(cotacao => {
+            return {
+                "Fornecedor": encontrarFornecedor(cotacao.fornecedorId),
+                "Preço": "R$ " + cotacao.valor,
+                "Data": formatarData(cotacao.data)
+            }
+        });
+
+        const fileName = `cotacoes-${requisicao.id}.csv`;
+
+        exportFromJSON({ data, fileName, exportType: "csv" });
+    }
+
     function definirStatus(requisicao) {
         if (requisicao.cotacoes.length === 0) {
             return <p className="status aberta">Aberta</p>
-        } else if (requisicao.cotacoes.length > 1 && requisicao.cotacoes.length < 3) {
+        } else if (requisicao.cotacoes.length >= 1 && requisicao.cotacoes.length < 3) {
             return <p className="status emCotacao">Em cotação</p>;
         } else {
-            return <p className="status cotada">Cotada</p>;
+            return <p className="status cotada" onClick={() => baixarCSV(requisicao)}>Cotada {<IoMdDownload />}</p>;
         }
     }
 
