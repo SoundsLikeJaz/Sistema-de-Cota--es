@@ -204,7 +204,7 @@ a:hover {
   border: 2px solid rgb(29, 78, 216);
   padding: 10px;
   text-align: center;
-  text-align-font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 .controleUsuarios table .checkbox div {
   display: flex;
